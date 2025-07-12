@@ -5,6 +5,7 @@ _jwt_token = None
 
 def get_jwt_token():
     global _jwt_token
+
     if _jwt_token:
         return _jwt_token
 
@@ -17,6 +18,7 @@ def get_jwt_token():
 
     response = requests.get(url, headers=headers, params=params)
     response.raise_for_status()
-    _jwt_token = response.json()["jwt"]
-    print("JWT Token:", _jwt_token)
+    _jwt_token = response.json()["token"]
+
+    # print("JWT Response:", response.json())
     return _jwt_token
