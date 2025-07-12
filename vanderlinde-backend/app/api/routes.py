@@ -4,7 +4,7 @@ import aiofiles
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
 # from app.services.heidi_api import transcribe_audio, generate_consult_notes, log_consultation
-# from app.services.audio_processing import save_temp_audio, delete_temp_audio
+from app.services.audio_processing import save_temp_audio, delete_temp_audio
 from app.utils.logger import logger
 from app.services.openai_api import transcribe_audio_with_openai, generate_consult_notes_with_openai
 
@@ -12,20 +12,14 @@ app = FastAPI()
 
 @app.post("/consultation/upload")
 async def upload_audio(patient_id: str = Form(...), doctor_id: str = Form(...), audio: UploadFile = File(...)):
-    # Save the audio file locally
-    temp_audio_path = f"temp_{audio.filename}"
-    async with aiofiles.open(temp_audio_path, 'wb') as out_file:
-        content = await audio.read()
-        await out_file.write(content)
+    temp_audio_path = await save_temp_audio(audio)
 
     try:
-        # Step 1: Transcribe audio using OpenAI Whisper
         transcript = transcribe_audio_with_openai(temp_audio_path)
 
         if not transcript:
             return JSONResponse(status_code=500, content={"error": "Transcript generation failed."})
 
-        # Step 2: Generate consultation notes using OpenAI GPT
         consult_notes = generate_consult_notes_with_openai(transcript)
 
         return {
@@ -34,8 +28,7 @@ async def upload_audio(patient_id: str = Form(...), doctor_id: str = Form(...), 
         }
 
     finally:
-        if os.path.exists(temp_audio_path):
-            os.remove(temp_audio_path)
+        delete_temp_audio(temp_audio_path)
 
 
 # If using Heidi API
