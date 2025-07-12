@@ -26,6 +26,7 @@ env/
 *.bak
 *.swp
 temp_*
+*.mp3
 
 # OS-specific files
 .DS_Store
