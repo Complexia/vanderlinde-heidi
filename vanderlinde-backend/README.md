@@ -1,10 +1,22 @@
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-#### Run FastAPI server using `uvicorn`:
+### Add Environment Variables
+Create a .env file in dir `vanderlinde-backend` with:
+```bash
+OPENAI_API_KEY=sk-...
+HEIDI_API_KEY=...
+HEIDI_BASE_URL=https://api.staging.heidihealth.com/v1
+```
+
+### Run FastAPI server using `uvicorn`:
 ```bash
 uvicorn app.main:app --reload
 ```
 
-## Test with sample audio file
+### Test with sample text to audio file
 1. Generate text-to-speech
     ```bash
     python3 -m audio.text_to_speech
