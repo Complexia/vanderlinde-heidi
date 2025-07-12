@@ -1,4 +1,3 @@
-import os
 import requests
 from app.core.config import HEIDI_API_KEY, HEIDI_BASE_URL
 
