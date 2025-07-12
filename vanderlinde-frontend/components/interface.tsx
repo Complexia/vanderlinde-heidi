@@ -1,9 +1,13 @@
 "use client";
 
 import Sidebar from "./ui/sidebar";
+import Feed from "./feed/feed";
 
 export default function Interface() {
     return (
-        <Sidebar />
+        <div className="flex">
+            <Sidebar />
+            <Feed />
+        </div>
     );
 }

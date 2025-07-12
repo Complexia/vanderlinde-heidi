@@ -29,7 +29,7 @@ const Feed = () => {
   }, [fetchMeetings]);
 
   return (
-    <div className="p-8 bg-base-200 min-h-screen">
+    <div className="p-8 bg-base-200 min-h-screen w-full">
       <div className="tabs">
         <a className="tab tab-bordered tab-active">My Feed</a>
         <a className="tab tab-bordered">Tasks</a>

@@ -9,7 +9,7 @@ const Sidebar = () => {
     <aside className="w-64 bg-base-200 text-base-content h-screen p-4 flex flex-col">
       <div className="flex items-center mb-8">
         <FaFire className="text-primary text-3xl mr-2" />
-        <span className="text-xl font-bold">fireflies.ai</span>
+        <span className="text-xl font-bold">valderlinde</span>
       </div>
       <ul className="menu p-0 space-y-2 flex-grow">
         <li>

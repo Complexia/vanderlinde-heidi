@@ -1,10 +1,10 @@
 
-import Feed from '@/components/feed/feed';
+import Interface from '@/components/interface';
 
 export default function Home() {
   return (
-    <main>
-      <Feed />
+    <main className="h-screen w-screen ">
+      <Interface />
     </main>
   );
 }
