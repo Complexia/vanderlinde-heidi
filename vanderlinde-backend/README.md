@@ -8,7 +8,9 @@ Create a .env file in dir `vanderlinde-backend` with:
 ```bash
 OPENAI_API_KEY=sk-...
 HEIDI_API_KEY=...
-HEIDI_BASE_URL=https://registrar.api.heidihealth.com/api/v2/ml-scribe/open-api/
+HEIDI_BASE_URL=https://registrar.api.heidihealth.com/api/v2/ml-scribe/open-api
+HEIDI_EMAIL=test@heidihealth.com
+HEIDI_INTERNAL_ID=123
 ```
 
 ### Run FastAPI server using `uvicorn`:
