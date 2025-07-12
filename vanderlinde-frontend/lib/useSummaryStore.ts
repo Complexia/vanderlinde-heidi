@@ -73,11 +73,24 @@ const useSummaryStore = create<SummaryState>()(
         }
       },
       updateSummary: async (newSummaryContent) => {
-        const currentSummary = get().summary;
-
         // Ensure content is not empty before updating
         if (!newSummaryContent.content) {
           console.warn('Attempted to update summary with empty content.');
+          return;
+        }
+
+        set({ loading: true });
+
+        // First, check if a summary already exists in the database
+        const { data: existingSummary, error: fetchError } = await supabase
+          .from('summary')
+          .select('id')
+          .single();
+
+        if (fetchError && fetchError.code !== 'PGRST116') {
+          // Handle errors other than 'no rows found'
+          console.error('Error checking for existing summary:', fetchError);
+          set({ loading: false });
           return;
         }
 
@@ -88,12 +101,12 @@ const useSummaryStore = create<SummaryState>()(
 
         let data, error;
 
-        if (currentSummary && currentSummary.id) {
+        if (existingSummary && existingSummary.id) {
           // Update existing summary
           ({ data, error } = await supabase
             .from('summary')
             .update(summaryToUpdate)
-            .eq('id', currentSummary.id)
+            .eq('id', existingSummary.id)
             .select()
             .single());
         } else {
@@ -103,12 +116,11 @@ const useSummaryStore = create<SummaryState>()(
 
         if (error) {
           console.error('Error updating summary:', error);
-          return;
-        }
-
-        if (data) {
+        } else if (data) {
           set({ summary: data });
         }
+
+        set({ loading: false });
       },
     }),
     { name: 'summary-store' }

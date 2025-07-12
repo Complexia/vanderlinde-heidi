@@ -39,13 +39,23 @@ const useMeetingStore = create<MeetingState>()(
         set((state) => ({ meetings: [newMeetingData, ...state.meetings] }));
 
         // After adding the meeting, trigger the summary update
-        const { summary: existingSummary, updateSummary } = useSummaryStore.getState();
+        const { summary: existingSummary, fetchSummary, updateSummary } = useSummaryStore.getState();
+
+        // Ensure we have the latest summary state
+        if (!existingSummary) {
+          await fetchSummary();
+        }
+
+        const currentSummary = useSummaryStore.getState().summary;
+
+        const meetingsForSummary = currentSummary ? [newMeetingData] : get().meetings;
+        const summaryToUpdateFrom = currentSummary ? currentSummary : null;
 
         try {
           const res = await fetch('/api/profile/summarize', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ meetings: [newMeetingData], existingSummary }),
+            body: JSON.stringify({ meetings: meetingsForSummary, existingSummary: summaryToUpdateFrom }),
           });
 
           if (!res.ok) {
