@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { FiHome, FiVideo, FiBarChart2, FiPlay, FiUsers, FiUpload, FiLayers, FiCpu, FiHash, FiTrendingUp, FiStar, FiSettings } from 'react-icons/fi';
+import { FiHome, FiVideo, FiBarChart2, FiPlay, FiUsers, FiUpload, FiLayers, FiCpu, FiHash, FiTrendingUp, FiStar, FiSettings, FiClock } from 'react-icons/fi';
 import { FaFire } from 'react-icons/fa';
+import { RiFileHistoryFill } from 'react-icons/ri';
 
 const Sidebar = () => {
   return (
@@ -13,41 +14,24 @@ const Sidebar = () => {
       </div>
       <ul className="menu p-0 space-y-2 flex-grow">
         <li>
-          <a className="active">
+          <a href="/" className="active">
             <FiHome className="text-xl" />
             Home
           </a>
         </li>
         <li>
-          <a>
+          <a href="/consultations">
             <FiVideo className="text-xl" />
-            Meetings
-          </a>
+            Consultations
+          </a>  
         </li>
         <li>
           <a>
-            <FiTrendingUp className="text-xl" />
-            Meeting Status
+            <FiClock className="text-xl" />
+            History
           </a>
         </li>
-        <li>
-          <a>
-            <FiPlay className="text-xl" />
-            Playlist
-          </a>
-        </li>
-        <li>
-          <a>
-            <FiUsers className="text-xl" />
-            Contacts
-          </a>
-        </li>
-        <li>
-          <a>
-            <FiUpload className="text-xl" />
-            Uploads
-          </a>
-        </li>
+        
       </ul>
       <div className="divider"></div>
       <ul className="menu p-0 space-y-2 flex-grow">
@@ -82,7 +66,7 @@ const Sidebar = () => {
         <li>
           <a>
             <FiUsers className="text-xl" />
-            Team
+            Account
           </a>
         </li>
         <li>

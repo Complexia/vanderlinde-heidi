@@ -23,7 +23,7 @@ const iconMap: Record<string, LucideIcon> = {
   'credit-card': CreditCard,
 };
 
-const Feed = () => {
+const Consultations = () => {
   const { meetings, loading, fetchMeetings } = useMeetingStore();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Feed = () => {
             <div className="flex justify-between items-center">
                 <h2 className="text-lg font-semibold flex items-center">
                     <Sparkles className="w-5 h-5 mr-2 text-primary" />
-                    Recent · {meetings.length} Consultation{meetings.length > 1 ? 's' : ''}
+                    All time consultations · {meetings.length} Consultation{meetings.length > 1 ? 's' : ''}
                 </h2>
                 <button className="btn btn-ghost btn-sm">
                     <MessageSquare className="w-4 h-4 mr-2" />
@@ -102,4 +102,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default Consultations;
