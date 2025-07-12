@@ -1,8 +1,10 @@
 
-import Interface from "../components/interface";
+import Feed from '@/components/feed/feed';
 
 export default function Home() {
   return (
-    <Interface />
+    <main>
+      <Feed />
+    </main>
   );
 }
