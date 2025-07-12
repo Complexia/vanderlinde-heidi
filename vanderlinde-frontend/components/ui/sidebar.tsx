@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { FiHome, FiVideo, FiBarChart2, FiPlay, FiUsers, FiUpload, FiLayers, FiCpu, FiHash, FiTrendingUp, FiStar, FiSettings, FiClock } from 'react-icons/fi';
-import { FaFire } from 'react-icons/fa';
+import { FaBrain, FaFire, FaHeart } from 'react-icons/fa';
 import { RiFileHistoryFill } from 'react-icons/ri';
+import { FaIdCardClip } from 'react-icons/fa6';
 
 const Sidebar = () => {
   return (
@@ -31,10 +32,16 @@ const Sidebar = () => {
             History
           </a>
         </li>
+        <li>
+          <a href="/profile">
+            <FaHeart className="text-xl" />
+            My Patient Profile
+          </a>
+        </li>
         
       </ul>
-      <div className="divider"></div>
-      <ul className="menu p-0 space-y-2 flex-grow">
+      {/* <div className="divider"></div> */}
+      {/* <ul className="menu p-0 space-y-2 flex-grow">
         <li>
           <a>
             <FiLayers className="text-xl" />
@@ -60,8 +67,8 @@ const Sidebar = () => {
             Analytics
           </a>
         </li>
-      </ul>
-      <div className="divider"></div>
+      </ul> */}
+      {/* <div className="divider"></div> */}
       <ul className="menu p-0 space-y-2">
         <li>
           <a>

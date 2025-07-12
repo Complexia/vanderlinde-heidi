@@ -30,18 +30,22 @@ const Feed = () => {
     fetchMeetings();
   }, [fetchMeetings]);
 
+  console.log("meetings",meetings);
+
   return (
     <div className="p-8 bg-base-200 min-h-screen w-full">
-      <div className="flex justify-between items-center">
-        <div className="tabs">
+      <div className="flex justify-end items-center">
+        {/* <div className="tabs">
           <a className="tab tab-bordered tab-active">My Feed</a>
           <a className="tab tab-bordered">Tasks</a>
           <a className="tab tab-bordered">AI Apps <div className="badge badge-sm badge-primary ml-2">NEW</div></a>
-        </div>
-        <button className="btn btn-primary">
-          <Plus className="w-4 h-4 mr-2" />
-          New Consultation
-        </button>
+        </div> */}
+        <Link href="/scribing">
+          <button className="btn btn-primary">
+            <Plus className="w-4 h-4 mr-2" />
+            New Consultation
+          </button>
+        </Link>
       </div>
 
       <div className="mt-6">

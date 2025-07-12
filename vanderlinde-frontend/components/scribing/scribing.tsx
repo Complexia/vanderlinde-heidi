@@ -64,16 +64,22 @@ const Scribing = () => {
     setIsListening(false);
     setIsSummarizing(true);
 
-    const summary = await summarizeTranscription(transcription);
+    const summaryResponse = await summarizeTranscription(transcription);
     
-    const newMeeting: Meeting = {
-        id: new Date().toISOString(),
-        title: 'Scribing Session Summary',
+    // console.log(summaryResponse);
+
+    const summary_json = JSON.parse(summaryResponse);
+    console.log(summary_json);
+    console.log(summary_json.title);    
+    console.log(summary_json.contentSummary);
+    const newMeeting = {
+        title: summary_json.title,
         date: new Date().toLocaleString(),
-        content: [
-            { icon: 'file-text', text: `Full Transcription: ${transcription}` },
-            { icon: 'list-checks', text: `AI Summary: ${summary}` }
-        ]
+        content: summary_json.contentSummary
+        // content: [
+        //     // { icon: 'file-text', text: `Full Transcription: ${transcription}` },
+        //     { icon: 'list-checks', text: `${summary}` }
+        // ]
     };
 
     addMeeting(newMeeting);

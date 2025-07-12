@@ -32,7 +32,7 @@ const Consultations = () => {
 
   return (
     <div className="p-8 bg-base-200 min-h-screen w-full">
-      <div className="flex justify-between items-center">
+      {/* <div className="flex justify-between items-center">
         <div className="tabs">
           <a className="tab tab-bordered tab-active">My Feed</a>
           <a className="tab tab-bordered">Tasks</a>
@@ -42,7 +42,7 @@ const Consultations = () => {
           <Plus className="w-4 h-4 mr-2" />
           New Consultation
         </button>
-      </div>
+      </div> */}
 
       <div className="mt-6">
         {loading ? (
