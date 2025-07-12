@@ -1,28 +1,37 @@
-from app.services.heidi_api import transcribe_audio, generate_consult_notes, log_consultation
-import mimetypes
+import requests
 
-class MockUploadFile:
-    def __init__(self, path):
-        self.file = open(path, "rb")
-        self.filename = path.split("/")[-1]
-        self.content_type = mimetypes.guess_type(path)[0] or "audio/wav"
+API_URL = "http://localhost:8000/consultation/heidi/upload"
 
-    def close(self):
-        if not self.file.closed:
-            self.file.close()
+PATIENT_ID = "123"
+DOCTOR_ID = "456"
+AUDIO_FILE_PATH = "audio/sample_consultation.mp3"
 
-audio_path = "audio/sample_consultation.mp3"
-mock_audio = MockUploadFile(audio_path)
+def test_heidi_api():
+    try:
+        with open(AUDIO_FILE_PATH, "rb") as audio_file:
+            files = {
+                "audio": ("sample_consultation.mp3", audio_file, "audio/wav")
+            }
+            data = {
+                "patient_id": PATIENT_ID,
+                "doctor_id": DOCTOR_ID
+            }
 
-try:
-    transcript = transcribe_audio(audio_path, mock_audio)
-    print("Transcript:\n", transcript)
+            response = requests.post(API_URL, files=files, data=data)
+            response.raise_for_status()
 
-    consult_notes = generate_consult_notes(transcript)
-    print("\nConsult Notes:\n", consult_notes)
+            result = response.json()
+            print("\n Transcript:")
+            print(result.get("transcript", "[No transcript returned]"))
+            print("\n Consult Notes:")
+            print(result.get("consult_notes", "[No notes returned]"))
+            print("\n Session ID:", result.get("session_id"))
 
-    result = log_consultation("patient-123", "doctor-456", transcript, consult_notes)
-    print("\nHeidi Log Response:\n", result)
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+        print(f"Response: {response.text}")
+    except Exception as e:
+        print(f"Error: {e}")
 
-finally:
-    mock_audio.close()
+if __name__ == "__main__":
+    test_heidi_api()
